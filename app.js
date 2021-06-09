@@ -12,7 +12,16 @@ db.authenticate()
 const app = express();
 
 // handlebars
-app.engine('handlebars', exphbs({ defaultLayout: 'main' }));
+app.engine(
+  'handlebars',
+  exphbs({
+    defaultLayout: 'main',
+    runtimeOptions: {
+      allowProtoPropertiesByDefault: true,
+      allowProtoMethodsByDefault: true,
+    },
+  })
+);
 app.set('view engine', 'handlebars');
 
 // set static folder
