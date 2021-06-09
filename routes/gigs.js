@@ -1,17 +1,17 @@
 const express = require('express');
 const router = express.Router();
 
-const db = require('../config/database');
 const Gig = require('../models/Gig');
+const { Op } = require('sequelize');
 
 // Get gig list
 router.get('/', (req, res) =>
   Gig.findAll()
-    .then((gigs) => {
+    .then((gigs) =>
       res.render('gigs', {
         gigs,
-      });
-    })
+      })
+    )
     .catch((err) => console.log(err))
 );
 
@@ -68,6 +68,17 @@ router.post('/add', (req, res) => {
       .then((gig) => res.redirect('/gigs'))
       .catch((err) => console.log(err));
   }
+});
+
+// search for gigs
+router.get('/search', (req, res) => {
+  const { term } = req.query;
+
+  Gig.findAll({
+    where: { technologies: { [Op.like]: `%${term.toLowerCase()}%` } },
+  })
+    .then((gigs) => res.render('gigs', { gigs }))
+    .catch((err) => console.log(err));
 });
 
 module.exports = router;
