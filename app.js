@@ -24,6 +24,9 @@ app.engine(
 );
 app.set('view engine', 'handlebars');
 
+// body parser
+app.use(bodyParser.urlencoded({ extended: false }));
+
 // set static folder
 app.use(express.static(path.join(__dirname, 'public')));
 
