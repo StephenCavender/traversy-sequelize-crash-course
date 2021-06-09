@@ -15,8 +15,11 @@ router.get('/', (req, res) =>
     .catch((err) => console.log(err))
 );
 
+// display add gig form
+router.get('/add', (req, res) => res.render('add'));
+
 // Add a gig
-router.get('/add', (req, res) => {
+router.post('/add', (req, res) => {
   const data = {
     title: 'iOS app',
     technologies: 'swift,java,mobile',
