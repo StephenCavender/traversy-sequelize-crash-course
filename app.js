@@ -2,9 +2,7 @@ const express = require('express');
 const exphbs = require('express-handlebars');
 const bodyParser = require('body-parser');
 const path = require('path');
-
-const { Sequelize } = require('sequelize');
-const db = new Sequelize('postgres://stephencavender:@localhost:5432/postgres'); // Example for postgres
+const db = require('./config/database');
 
 // Test db
 db.authenticate()
